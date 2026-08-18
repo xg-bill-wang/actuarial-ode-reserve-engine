@@ -64,21 +64,9 @@ python3 life_reserve_model.py
 
 The script regenerates the CSV outputs in `outputs/` and chart figures in `figures/`.
 
-## Skills Demonstrated
-
-- Python actuarial modeling
-- Numerical methods for ODEs
-- Life contingency reserve logic
-- Scenario and sensitivity analysis
-- Model validation against theoretical solutions
-- Data visualization and CSV reporting
 
 ## Credit
 
 This public portfolio project extends ideas from a collaborative ODE engine originally developed with Wenxuan Ding. This version focuses on actuarial applications and uses an independent, recruiter-friendly implementation for public demonstration.
 
-## Resume Bullet
 
-```text
-Extended a collaborative Python ODE engine into an actuarial reserve modeling project using Thiele's differential equation, validating Euler, Heun, and RK4 methods against closed-form solutions and visualizing reserve sensitivity to mortality, interest-rate, and benefit assumptions.
-```
