@@ -120,8 +120,4 @@ The next extension should add a life contingency module with age-based mortality
 
 This public portfolio project extends ideas from a collaborative ODE engine originally developed with Wenxuan Ding. This repository focuses on the actuarial application layer and presents an independent, recruiter-friendly implementation for public review.
 
-## Resume Bullet
 
-```text
-Extended a collaborative Python ODE engine into a life actuarial reserve modeling project using Thiele's differential equation, validating Euler, Heun, and RK4 solvers against closed-form ODEs and visualizing reserve sensitivity to mortality, interest-rate, and benefit assumptions.
-```
