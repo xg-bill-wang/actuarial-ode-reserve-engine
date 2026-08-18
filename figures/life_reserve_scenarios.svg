@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="590" viewBox="0 0 980 590">
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<text x="40" y="40" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#222222">Life Insurance Reserve Scenarios</text>
+<text x="40" y="64" font-family="Arial, sans-serif" font-size="13" fill="#555555">30-year continuous reserve paths under mortality, interest, and benefit sensitivity assumptions</text>
+<line x1="82.00" y1="82" x2="82.00" y2="520" stroke="#EFEFEF"/>
+<text x="82.00" y="546" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#555555">0</text>
+<line x1="196.67" y1="82" x2="196.67" y2="520" stroke="#EFEFEF"/>
+<text x="196.67" y="546" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#555555">5</text>
+<line x1="311.33" y1="82" x2="311.33" y2="520" stroke="#EFEFEF"/>
+<text x="311.33" y="546" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#555555">10</text>
+<line x1="426.00" y1="82" x2="426.00" y2="520" stroke="#EFEFEF"/>
+<text x="426.00" y="546" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#555555">15</text>
+<line x1="540.67" y1="82" x2="540.67" y2="520" stroke="#EFEFEF"/>
+<text x="540.67" y="546" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#555555">20</text>
+<line x1="655.33" y1="82" x2="655.33" y2="520" stroke="#EFEFEF"/>
+<text x="655.33" y="546" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#555555">25</text>
+<line x1="770.00" y1="82" x2="770.00" y2="520" stroke="#EFEFEF"/>
+<text x="770.00" y="546" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#555555">30</text>
+<line x1="82" y1="520.00" x2="770" y2="520.00" stroke="#E1E1E1"/>
+<text x="72" y="524.00" text-anchor="end" font-family="Arial, sans-serif" font-size="12" fill="#555555">-15,000</text>
+<line x1="82" y1="432.40" x2="770" y2="432.40" stroke="#E1E1E1"/>
+<text x="72" y="436.40" text-anchor="end" font-family="Arial, sans-serif" font-size="12" fill="#555555">-6,600</text>
+<line x1="82" y1="344.80" x2="770" y2="344.80" stroke="#E1E1E1"/>
+<text x="72" y="348.80" text-anchor="end" font-family="Arial, sans-serif" font-size="12" fill="#555555">1,800</text>
+<line x1="82" y1="257.20" x2="770" y2="257.20" stroke="#E1E1E1"/>
+<text x="72" y="261.20" text-anchor="end" font-family="Arial, sans-serif" font-size="12" fill="#555555">10,200</text>
+<line x1="82" y1="169.60" x2="770" y2="169.60" stroke="#E1E1E1"/>
+<text x="72" y="173.60" text-anchor="end" font-family="Arial, sans-serif" font-size="12" fill="#555555">18,600</text>
+<line x1="82" y1="82.00" x2="770" y2="82.00" stroke="#E1E1E1"/>
+<text x="72" y="86.00" text-anchor="end" font-family="Arial, sans-serif" font-size="12" fill="#555555">27,000</text>
+<line x1="82" y1="82" x2="82" y2="520" stroke="#333333"/>
+<line x1="82" y1="520" x2="770" y2="520" stroke="#333333"/>
+<text x="426.0" y="572" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#333333">Policy year</text>
+<text x="22" y="301.0" transform="rotate(-90 22 301.0)" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#333333">Reserve</text>
+<polyline points="82.00,363.57 120.22,356.34 158.44,348.52 196.67,340.06 234.89,330.91 273.11,321.02 311.33,310.32 349.56,298.75 387.78,286.23 426.00,272.70 464.22,258.06 502.44,242.24 540.67,225.12 578.89,206.60 617.11,186.58 655.33,164.93 693.56,141.51 731.78,116.18 770.00,88.79" fill="none" stroke="#3B6EA8" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="82.00,363.57 120.22,367.21 158.44,371.18 196.67,375.51 234.89,380.25 273.11,385.42 311.33,391.08 349.56,397.25 387.78,404.00 426.00,411.36 464.22,419.41 502.44,428.20 540.67,437.81 578.89,448.30 617.11,459.75 655.33,472.27 693.56,485.95 731.78,500.88 770.00,517.20" fill="none" stroke="#CC6B49" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="82.00,363.57 120.22,356.43 158.44,348.90 196.67,340.95 234.89,332.57 273.11,323.73 311.33,314.41 349.56,304.58 387.78,294.20 426.00,283.26 464.22,271.72 502.44,259.55 540.67,246.71 578.89,233.17 617.11,218.88 655.33,203.81 693.56,187.92 731.78,171.16 770.00,153.48" fill="none" stroke="#8B9A46" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="82.00,363.57 120.22,361.76 158.44,359.81 196.67,357.69 234.89,355.41 273.11,352.93 311.33,350.26 349.56,347.37 387.78,344.24 426.00,340.85 464.22,337.19 502.44,333.24 540.67,328.96 578.89,324.33 617.11,319.32 655.33,313.91 693.56,308.06 731.78,301.72 770.00,294.88" fill="none" stroke="#A45A7A" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="808" y1="98" x2="836" y2="98" stroke="#3B6EA8" stroke-width="4" stroke-linecap="round"/>
+<text x="846" y="102" font-family="Arial, sans-serif" font-size="13" fill="#333333">Base</text>
+<line x1="808" y1="128" x2="836" y2="128" stroke="#CC6B49" stroke-width="4" stroke-linecap="round"/>
+<text x="846" y="132" font-family="Arial, sans-serif" font-size="13" fill="#333333">Higher mortality</text>
+<line x1="808" y1="158" x2="836" y2="158" stroke="#8B9A46" stroke-width="4" stroke-linecap="round"/>
+<text x="846" y="162" font-family="Arial, sans-serif" font-size="13" fill="#333333">Lower interest</text>
+<line x1="808" y1="188" x2="836" y2="188" stroke="#A45A7A" stroke-width="4" stroke-linecap="round"/>
+<text x="846" y="192" font-family="Arial, sans-serif" font-size="13" fill="#333333">Higher benefit</text>
+</svg>
