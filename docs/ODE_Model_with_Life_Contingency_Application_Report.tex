@@ -1,0 +1,298 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[margin=0.88in,top=0.76in,bottom=0.62in]{geometry}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage[table]{xcolor}
+\usepackage{caption}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage{float}
+
+\definecolor{ink}{HTML}{222222}
+\definecolor{muted}{HTML}{555555}
+\definecolor{rulegray}{HTML}{B7B7B7}
+\definecolor{lightgray}{HTML}{F4F4F4}
+\definecolor{reportblue}{HTML}{244F7A}
+\definecolor{reportorange}{HTML}{B85C38}
+\definecolor{reportolive}{HTML}{6F7B31}
+\definecolor{reportrose}{HTML}{8E4F70}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{7pt}
+\setstretch{1.06}
+\color{ink}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[R]{\thepage}
+
+\captionsetup{
+  font={small,it},
+  labelfont=it,
+  textfont=it,
+  justification=centering,
+  singlelinecheck=false
+}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcommand{\reportsection}[1]{%
+  \vspace{5pt}
+  \begin{center}
+    {\large\bfseries #1}
+  \end{center}
+  \vspace{1pt}
+}
+\newcommand{\reportsubsection}[1]{%
+  \vspace{5pt}
+  {\normalsize\bfseries #1.}
+}
+
+\begin{document}
+
+\begin{center}
+  {\Large\bfseries ODE Model with Life Contingency Application}\\[4pt]
+  {\normalsize Technical Model Report}
+\end{center}
+
+\reportsection{1. Purpose and Scope}
+
+This report presents an ordinary differential equation model for a simplified life actuarial reserve problem. The model combines numerical ODE methods with life contingency assumptions so that reserve movement can be studied as a function of interest accumulation, premium inflow, mortality intensity, and death benefit exposure.
+
+The model is not intended to be a production pricing or statutory valuation system. It is a controlled technical example that focuses on model structure, numerical validation, and actuarial interpretation. The simplified setting makes the relationship between the differential equation, the implementation, and the reserve results easier to inspect.
+
+\reportsubsection{Model components}
+\begin{itemize}[leftmargin=18pt,itemsep=2pt,topsep=3pt]
+  \item Numerical solvers: Euler, Heun, and fourth-order Runge-Kutta methods.
+  \item Validation tests: closed-form ODE examples used to check solver behavior.
+  \item Reserve model: a simplified continuous life reserve based on Thiele's differential equation.
+  \item Scenario analysis: mortality, interest, and benefit sensitivities over a 30-year horizon.
+  \item Outputs: reserve paths, validation diagnostics, and summary tables.
+\end{itemize}
+
+\newpage
+\reportsection{2. Model Structure}
+
+The project uses a modular structure. A model supplies a derivative function, an initial state, and a time grid. A numerical solver then advances the state across that grid. This design allows the same solver interface to be used for both theoretical validation examples and the actuarial reserve application.
+
+\begin{table}[H]
+\centering
+\small
+\rowcolors{1}{lightgray}{white}
+\begin{tabularx}{\textwidth}{p{1.25in} Y Y}
+\toprule
+\textbf{Layer} & \textbf{Role} & \textbf{Output} \\
+\midrule
+Numerical engine & Implements Euler, Heun, and RK4 update rules. & State path over time. \\
+Validation models & Use ODEs with analytic solutions, including exponential decay and logistic growth. & Maximum absolute error by solver. \\
+Life contingency application & Uses Thiele's differential equation for a simplified continuous life reserve. & Reserve paths under selected assumptions. \\
+Reporting layer & Writes CSV outputs and SVG/PDF figures. & Reproducible model outputs and diagnostics. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\newpage
+\reportsection{3. Numerical Methodology}
+
+The numerical component compares three standard one-step ODE methods. Euler's method is included as a simple baseline. Heun's method improves on Euler through a predictor-corrector step. Fourth-order Runge-Kutta is used as the main scenario solver because it usually provides much better accuracy for a given step size.
+
+\begin{table}[H]
+\centering
+\small
+\rowcolors{1}{lightgray}{white}
+\begin{tabularx}{\textwidth}{p{1.1in} p{1.85in} Y}
+\toprule
+\textbf{Method} & \textbf{Implementation role} & \textbf{Expected behavior} \\
+\midrule
+Euler & Baseline solver & Simple and transparent, but relatively high discretization error. \\
+Heun & Improved Euler solver & Uses average slope information to reduce error. \\
+RK4 & Primary scenario solver & Higher-order method with materially lower error in validation tests. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\reportsubsection{Validation procedure}
+Before using the engine for the reserve model, the solvers are tested against two equations with known closed-form solutions. The error measure is the maximum absolute difference between the numerical path and the analytic path over the selected grid. This provides a compact check that the numerical methods are behaving as expected before they are applied to actuarial scenarios.
+
+\begin{figure}[H]
+\centering
+\setlength{\unitlength}{1pt}
+\begin{picture}(430,185)
+  \footnotesize
+  \color{rulegray}
+  \multiput(45,30)(0,15){9}{\line(1,0){360}}
+  \color{ink}
+  \put(45,30){\line(1,0){360}}
+  \put(45,30){\line(0,1){120}}
+  \put(30,26){\makebox(0,0)[r]{1e-7}}
+  \put(30,86){\makebox(0,0)[r]{1e-3}}
+  \put(30,146){\makebox(0,0)[r]{1e1}}
+  \color{reportblue}\put(65,30){\rule{34pt}{102pt}}
+  \color{reportorange}\put(123,30){\rule{34pt}{73pt}}
+  \color{reportolive}\put(181,30){\rule{34pt}{10pt}}
+  \color{reportblue}\put(239,30){\rule{34pt}{118pt}}
+  \color{reportorange}\put(297,30){\rule{34pt}{90pt}}
+  \color{reportolive}\put(355,30){\rule{34pt}{27pt}}
+  \color{ink}
+  \scriptsize
+  \put(82,137){\makebox(0,0){6.5e-01}}
+  \put(140,108){\makebox(0,0){7.7e-03}}
+  \put(198,45){\makebox(0,0){4.7e-07}}
+  \put(256,153){\makebox(0,0){6.9e+00}}
+  \put(314,125){\makebox(0,0){1.0e-01}}
+  \put(372,62){\makebox(0,0){6.3e-06}}
+  \put(82,14){\makebox(0,0){Euler}}
+  \put(140,14){\makebox(0,0){Heun}}
+  \put(198,14){\makebox(0,0){RK4}}
+  \put(256,14){\makebox(0,0){Euler}}
+  \put(314,14){\makebox(0,0){Heun}}
+  \put(372,14){\makebox(0,0){RK4}}
+  \put(140,-3){\makebox(0,0){Exponential decay}}
+  \put(314,-3){\makebox(0,0){Logistic growth}}
+\end{picture}
+\caption{Solver validation against closed-form ODE solutions. Lower values indicate smaller maximum absolute error over the evaluation grid.}
+\end{figure}
+
+In these validation cases, the observed ranking is consistent with theory: RK4 has the smallest errors, Heun improves materially on Euler, and Euler remains useful mainly as a transparent baseline.
+
+\newpage
+\reportsection{4. Life Contingency Application}
+
+The application layer applies the numerical engine to a simplified continuous life insurance reserve problem. The reserve is modeled as a function of interest accumulation, premium inflow, mortality intensity, and death benefit exposure. This connects the numerical model to a recognizable life contingency setting: valuing how future benefit obligations and financial assumptions affect the reserve held for a policy.
+
+\reportsubsection{Reserve equation}
+\begin{center}
+\fcolorbox{rulegray}{lightgray}{%
+  \parbox{0.88\textwidth}{%
+    \centering
+    \vspace{4pt}
+    \[
+      \frac{dV}{dt} = \delta V + P - \mu(B - V)
+    \]
+    \vspace{-5pt}
+  }%
+}
+\end{center}
+
+In this equation, $V$ denotes the reserve, $\delta$ is the force of interest, $P$ is the annual premium rate, $\mu$ is the mortality intensity, and $B$ is the death benefit. The term $\delta V$ reflects investment accumulation on the reserve; the premium term increases the reserve; the mortality term reflects expected claim pressure from death benefits net of reserve already held.
+
+\begin{table}[H]
+\centering
+\small
+\rowcolors{1}{lightgray}{white}
+\begin{tabularx}{\textwidth}{p{1.1in} p{1.35in} Y}
+\toprule
+\textbf{Input} & \textbf{Base value} & \textbf{Interpretation} \\
+\midrule
+$\delta$ & 3.5\% & Force of interest used for reserve accumulation. \\
+$\mu$ & 1.2\% & Constant mortality intensity for the simplified model. \\
+$P$ & \$1,600 & Annual premium rate entering the reserve equation. \\
+$B$ & \$100,000 & Death benefit paid on claim. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\reportsubsection{Scenario design}
+\begin{itemize}[leftmargin=18pt,itemsep=2pt,topsep=3pt]
+  \item Base case: standard assumptions for interest, mortality, premium, and benefit.
+  \item Higher mortality: increases expected claim pressure and tests reserve sensitivity to mortality risk.
+  \item Lower interest: reduces investment accumulation and tests sensitivity to financial assumptions.
+  \item Higher benefit: increases death benefit exposure and tests sensitivity to policy design.
+\end{itemize}
+
+\newpage
+\reportsection{5. Results and Findings}
+
+The scenario results show how the reserve path changes when individual life contingency and financial assumptions are stressed. The base case produces positive reserve growth over the 30-year horizon. Higher mortality produces the lowest reserve path because expected claim pressure rises. Lower interest reduces accumulation, while a higher benefit reduces the reserve path through higher claim exposure.
+
+\begin{figure}[H]
+\centering
+\setlength{\unitlength}{1pt}
+\begin{picture}(430,205)
+  \footnotesize
+  \color{rulegray}
+  \multiput(45,35)(47.5,0){7}{\line(0,1){145}}
+  \multiput(45,35)(0,36.25){5}{\line(1,0){285}}
+  \color{ink}
+  \put(45,35){\line(1,0){285}}
+  \put(45,35){\line(0,1){145}}
+  \scriptsize
+  \put(38,35){\makebox(0,0)[r]{-15,000}}
+  \put(38,71){\makebox(0,0)[r]{-5,000}}
+  \put(38,107){\makebox(0,0)[r]{5,000}}
+  \put(38,143){\makebox(0,0)[r]{15,000}}
+  \put(38,179){\makebox(0,0)[r]{25,000}}
+  \put(45,20){\makebox(0,0){0}}
+  \put(92.5,20){\makebox(0,0){5}}
+  \put(140,20){\makebox(0,0){10}}
+  \put(187.5,20){\makebox(0,0){15}}
+  \put(235,20){\makebox(0,0){20}}
+  \put(282.5,20){\makebox(0,0){25}}
+  \put(330,20){\makebox(0,0){30}}
+  \put(187.5,3){\makebox(0,0){Policy year}}
+  \thicklines
+  \color{reportblue}
+  \qbezier(45,85.6)(68.75,89.4)(92.5,93.2)
+  \qbezier(92.5,93.2)(116.25,98.0)(140,102.8)
+  \qbezier(140,102.8)(163.75,108.9)(187.5,115.0)
+  \qbezier(187.5,115.0)(211.25,122.7)(235,130.4)
+  \qbezier(235,130.4)(258.75,140.1)(282.5,149.8)
+  \qbezier(282.5,149.8)(306.25,162.1)(330,174.4)
+  \color{reportorange}
+  \qbezier(45,85.6)(68.75,83.7)(92.5,81.7)
+  \qbezier(92.5,81.7)(116.25,79.2)(140,76.7)
+  \qbezier(140,76.7)(163.75,73.4)(187.5,70.1)
+  \qbezier(187.5,70.1)(211.25,65.9)(235,61.6)
+  \qbezier(235,61.6)(258.75,56.0)(282.5,50.4)
+  \qbezier(282.5,50.4)(306.25,43.2)(330,35.9)
+  \color{reportolive}
+  \qbezier(45,85.6)(68.75,89.3)(92.5,92.9)
+  \qbezier(92.5,92.9)(116.25,97.2)(140,101.5)
+  \qbezier(140,101.5)(163.75,106.5)(187.5,111.5)
+  \qbezier(187.5,111.5)(211.25,117.5)(235,123.4)
+  \qbezier(235,123.4)(258.75,130.3)(282.5,137.2)
+  \qbezier(282.5,137.2)(306.25,145.4)(330,153.5)
+  \color{reportrose}
+  \qbezier(45,85.6)(68.75,86.6)(92.5,87.5)
+  \qbezier(92.5,87.5)(116.25,88.7)(140,89.9)
+  \qbezier(140,89.9)(163.75,91.4)(187.5,92.9)
+  \qbezier(187.5,92.9)(211.25,94.9)(235,96.8)
+  \qbezier(235,96.8)(258.75,99.2)(282.5,101.6)
+  \qbezier(282.5,101.6)(306.25,104.7)(330,107.8)
+  \thinlines
+  \color{reportblue}\put(350,170){\line(1,0){15}}\color{ink}\put(370,167){\makebox(0,0)[l]{Base}}
+  \color{reportorange}\put(350,153){\line(1,0){15}}\color{ink}\put(370,150){\makebox(0,0)[l]{Higher mortality}}
+  \color{reportolive}\put(350,136){\line(1,0){15}}\color{ink}\put(370,133){\makebox(0,0)[l]{Lower interest}}
+  \color{reportrose}\put(350,119){\line(1,0){15}}\color{ink}\put(370,116){\makebox(0,0)[l]{Higher benefit}}
+\end{picture}
+\caption{Reserve paths over a 30-year policy horizon under selected assumption sensitivities.}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\small
+\rowcolors{1}{lightgray}{white}
+\begin{tabularx}{\textwidth}{p{1.35in} p{1.35in} Y}
+\toprule
+\textbf{Scenario} & \textbf{30-year reserve} & \textbf{Finding} \\
+\midrule
+Base & \$26,349 & Premium and interest assumptions support reserve growth. \\
+Higher mortality & \$-14,731 & Higher expected claim cost materially lowers the reserve path. \\
+Lower interest & \$20,146 & Lower accumulation reduces the terminal reserve. \\
+Higher benefit & \$6,587 & Larger benefit exposure lowers reserve growth relative to base. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\reportsubsection{Key findings}
+\begin{itemize}[leftmargin=18pt,itemsep=2pt,topsep=3pt]
+  \item Validation results are consistent with the expected ranking of the numerical methods.
+  \item The same ODE interface can be reused across theoretical examples and life reserve scenarios.
+  \item The reserve application makes the output interpretable for life actuarial work because changes in assumptions have clear financial meaning.
+\end{itemize}
+
+\end{document}
